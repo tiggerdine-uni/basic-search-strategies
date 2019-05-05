@@ -1,5 +1,8 @@
 import java.util.Random;
 
+/**
+* A genetic algorithm.
+*/
 public class GeneticAlgorithm {
 
 	private static final float CROSSOVER_RATE = 0.75f;
@@ -16,6 +19,9 @@ public class GeneticAlgorithm {
 		initialise();
 	}
 
+	/**
+	* Runs the algorithm.
+	*/
 	public void run() {
 		int generations = 0;
 		do {
@@ -29,14 +35,10 @@ public class GeneticAlgorithm {
 				population2[i * 2 + 1] = chromosomes[1].mutate(MUTATION_RATE);
 			}
 			population = population2;
-			/*
-			 * Uncomment these lines if you want to watch each tick of the
-			 * genetic algorithm.
-			 */
+			// Uncomment to watch each tick.
 			// try {
 			// Thread.sleep(100);
 			// } catch (InterruptedException e) {
-			// // TODO Auto-generated catch block
 			// e.printStackTrace();
 			// }
 			generations++;
@@ -45,6 +47,9 @@ public class GeneticAlgorithm {
 		System.out.print("The genetic algorithm took " + generations + " generations and ");
 	}
 
+	/**
+	* Gets the fittest chromosome.
+	*/
 	private Chromosome getFittestChromosome() {
 		Chromosome fittestChromosome = population[0];
 		for (int i = 1; i < POPULATION_SIZE; i++) {
@@ -55,13 +60,20 @@ public class GeneticAlgorithm {
 		return fittestChromosome;
 	}
 
+	/**
+	* Initialises the population with random chromosomes.
+	*/
 	private void initialise() {
 		for (int i = 0; i < POPULATION_SIZE; i++) {
 			population[i] = new Chromosome();
 		}
 	}
 
+	/**
+	* Selects a pair of chromosomes using tournament selection.
+	*/
 	private Chromosome[] select() {
+		// Grab two random chromosomes.
 		int i = random.nextInt(POPULATION_SIZE);
 		// System.out.println("i = " + i + ", population[" + i + "].fitness = "
 		// + population[i].fitness);
@@ -71,8 +83,10 @@ public class GeneticAlgorithm {
 		} while (i2 == i);
 		// System.out.println("i2 = " + i2 + ", population[" + i2 + "].fitness =
 		// " + population[i2].fitness);
+		// They fight.
 		int j = (population[i].fitness < population[i2].fitness ? i : i2);
 		// System.out.println("j = " + j);
+		// Grab another two random chromosomes.
 		do {
 			i = random.nextInt(POPULATION_SIZE);
 		} while (i == j);
@@ -83,15 +97,21 @@ public class GeneticAlgorithm {
 		} while (i2 == i || i2 == j);
 		// System.out.println("i2 = " + i2 + ", population[" + i2 + "].fitness =
 		// " + population[i2].fitness);
+		// They fight.
 		int j2 = (population[i].fitness < population[i2].fitness ? i : i2);
 		// System.out.println("j2 = " + j2);
+		// Return the winners.
 		return new Chromosome[] { population[j], population[j2] };
 	}
 
+	/**
+	* Returns true when it's time to terminate the algorithm.
+	*/
 	private boolean terminate() {
 		Chromosome fittestChromosome = getFittestChromosome();
 		System.out.println(fittestChromosome.string);
 		if (fittestChromosome.fitness == 0) {
+			// The target string has been evolved.
 			return true;
 		}
 		return false;

@@ -1,4 +1,6 @@
-
+/**
+* A hill climbing algorithm.
+*/
 public class HillClimber {
 
 	private Chromosome chromosome;
@@ -7,19 +9,18 @@ public class HillClimber {
 		chromosome = new Chromosome();
 	}
 
+	/**
+	* Runs the algorithm.
+	*/
 	public void run() {
 		int steps = 0;
 		for (int i = 0; i < Main.NUMBER_OF_CHARACTERS; i++) {
 			boolean terminate = false;
 			do {
-				/*
-				 * Uncomment these lines if you want to watch each tick of the
-				 * hill climber.
-				 */
+				// Uncomment to watch each tick.
 				// try {
 				// Thread.sleep(10);
 				// } catch (InterruptedException e) {
-				// // TODO Auto-generated catch block
 				// e.printStackTrace();
 				// }
 				System.out.println(steps + " " + chromosome.string);
@@ -33,7 +34,6 @@ public class HillClimber {
 					rightCharacters[i] += 1;
 				}
 				Chromosome rightChromosome = new Chromosome(String.valueOf(rightCharacters));
-				// TODO what if left and right are both fitter?
 				if (leftChromosome.fitness < chromosome.fitness) {
 					chromosome = leftChromosome;
 					steps++;

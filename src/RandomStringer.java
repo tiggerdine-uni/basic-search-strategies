@@ -1,6 +1,9 @@
 import java.util.Arrays;
 import java.util.Random;
 
+/**
+* A random algorithm.
+*/
 public class RandomStringer {
 
 	private final Random random;
@@ -9,7 +12,7 @@ public class RandomStringer {
 		random = new Random();
 	}
 
-	/*
+	/**
 	 * Generates random strings. Not good enough.
 	 */
 	public void run() {
@@ -31,7 +34,7 @@ public class RandomStringer {
 		System.out.print("If you're reading this, a miracle has happened in ");
 	}
 
-	/*
+	/**
 	 * Generates random strings but restarts as soon as a wrong character is
 	 * generated. Still not good enough.
 	 */
@@ -59,7 +62,7 @@ public class RandomStringer {
 		System.out.print("If you're reading this, a miracle has happened in ");
 	}
 
-	/*
+	/**
 	 * Generates random strings by generating random characters one at a time
 	 * until the right character is generated.
 	 */

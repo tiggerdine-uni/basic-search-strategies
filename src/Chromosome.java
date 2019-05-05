@@ -1,12 +1,17 @@
 import java.util.Random;
 
+/**
+* A chromosome.
+*/
 public class Chromosome {
 
 	public final int fitness;
-	// This seemed less offensive than every chromosome having its own random.
 	private static final Random random = new Random();
 	public final String string;
 
+	/**
+	* Creates a random chromosome.
+	*/
 	public Chromosome() {
 		char[] characters = new char[Main.NUMBER_OF_CHARACTERS];
 		for (int i = 0; i < Main.NUMBER_OF_CHARACTERS; i++) {
@@ -16,11 +21,17 @@ public class Chromosome {
 		fitness = calculateFitness();
 	}
 
+	/**
+	* Creates a chromosome.
+	*/
 	public Chromosome(String string) {
 		this.string = string;
 		fitness = calculateFitness();
 	}
 
+	/**
+	* Calculates this chromosome's fitness.
+	*/
 	private int calculateFitness() {
 		int fitness = 0;
 		for (int i = 0; i < Main.NUMBER_OF_CHARACTERS; i++) {
@@ -29,6 +40,10 @@ public class Chromosome {
 		return fitness;
 	}
 
+	/**
+	* Crosses this chromosome with another chromosome and returns two new
+	* chromosomes.
+	*/
 	public Chromosome[] crossover(Chromosome parent) {
 		char[] characters = string.toCharArray();
 		char[] characters2 = parent.string.toCharArray();
@@ -43,6 +58,9 @@ public class Chromosome {
 				new Chromosome(String.valueOf(characters2)) };
 	}
 
+	/**
+	* Mutates this chromosome and returns a new chromosome.
+	*/
 	public Chromosome mutate(float mutationRate) {
 		char[] characters = string.toCharArray();
 		for (int i = 0; i < Main.NUMBER_OF_CHARACTERS; i++) {
